@@ -47,3 +47,4 @@ config APATCH_FIX_MODULES
         select MODULE_FORCE_UNLOAD
         
 endmenu
+
