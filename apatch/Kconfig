@@ -27,6 +27,7 @@ config APATCH_SUPPORT
 
         select AIO
 
+
 config APATCH_FIX_MODULES
 
 	tristate "Fix kernel modules in APatch"
@@ -45,6 +46,7 @@ config APATCH_FIX_MODULES
         select MODULE_FORCE_LOAD
 
         select MODULE_FORCE_UNLOAD
-        
-endmenu
 
+
+endmenu
+ 
