@@ -170,8 +170,8 @@ jobs:
         echo " " >> arch/${{ env.ARCH }}/Kconfig
         echo 'source "apatch/Kconfig"' >> arch/${{ env.ARCH }}/Kconfig
         echo "CONFIG_APATCH_SUPPORT=y" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
+        echo "CONFIG_APATCH_FIX_MODULES=y" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
         sed -i 's/CONFIG_CC_STACKPROTECTOR_STRONG=y/CONFIG_CC_STACKPROTECTOR_STRONG=n/' arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
-
         if [ ${{ env.DISABLE-LTO }} = true ]; then
             sed -i 's/CONFIG_LTO=y/CONFIG_LTO=n/' arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
             sed -i 's/CONFIG_LTO_CLANG=y/CONFIG_LTO_CLANG=n/' arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
