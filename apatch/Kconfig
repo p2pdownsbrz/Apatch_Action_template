@@ -2,51 +2,73 @@ menu "APatch Support"
 
 config APATCH_SUPPORT
 
-	bool "Basic APatch support"
+    bool "Enable Basic APatch support"
 
-	default n
+    default y
 
-	help
-	        Enable basic APatch support in-kernel.
+    help
 
-        select EXPERT
+            This helps you to enable requirements for APatch.
 
-        select KALLSYMS
+    select DEBUG_KERNEL
 
-        select KALLSYMS_ALL
-
-        select DEBUG_KERNEL
-
-        select OVERLAY_FS
-
-        select PRINTK
-
-        select MMU
+    select KALLSYMS
     
-        select SHMEM
-
-        select AIO
-
-
+    select KALLSYMS_ALL
+    
+    select SYSFS_SYSCALL
+    
+    select SIGNALFD
+    
+    select TIMERFD
+    
+    select EVENTFD
+    
+    select BUILD_ARM64_APPENDED_DTB_IMAGE
+    
+    select OVERLAY_FS
+    
 config APATCH_FIX_MODULES
 
-	tristate "Fix kernel modules in APatch"
+    tristate "Fix kernel modules in APatch"
 
-	default y if APATCH_SUPPORT
+    default y if APATCH_SUPPORT
 
-	depends on APATCH_SUPPORT
+    depends on APATCH_SUPPORT
 
-	help
-		Enable load modules.
+    help
+           Enable load modules.
 
-	select MODULES
+    select MODULES
+    
+    select MODULE_FORCE_LOAD
+    
+    select MODULE_UNLOAD
+    
+    select MODULE_FORCE_UNLOAD
+    
+    select MODVERSIONS
 
-        select MODULE_UNLOAD
+config APATCH_CUSTOMS
 
-        select MODULE_FORCE_LOAD
-
-        select MODULE_FORCE_UNLOAD
-
+    depends on APATCH_SUPPORT
+    
+    bool " APatch LocalVersion"
+    
+    default y if APATCH_SUPPORT
+    
+    help
+            Add APatch to your kernel.
+        
+    config LOCALVERSION
+    
+        depends on APATCH_CUSTOMS
+        
+        string
+        
+        default "-APatch"
 
 endmenu
+
+
  
