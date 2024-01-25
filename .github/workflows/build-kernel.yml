@@ -184,6 +184,13 @@ jobs:
             echo "CONFIG_CC_WERROR=n" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
         fi
 
+    - name: fix kernel build error
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
+        sed -i 's/YYLTYPE yyloc;/extern YYLTYPE yyloc;/' scripts/dtc/dtc-lexer.l
+        sed -i 's/YYLTYPE yyloc;/extern YYLTYPE yyloc;/' scripts/dtc/dtc-lexer.lex.c_shipped
+        
+
     - name: Setup ccache
       if: env.ENABLE_CCACHE == 'true'
       uses: hendrikmuhs/ccache-action@v1.2
