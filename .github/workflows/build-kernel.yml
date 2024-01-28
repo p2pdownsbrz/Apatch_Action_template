@@ -49,6 +49,8 @@ jobs:
         echo "CUSTOM_ANYKERNEL3_BRANCH=$(cat $CONFIG_ENV | grep -w "CUSTOM_ANYKERNEL3_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "ENABLE_CCACHE=$(cat $CONFIG_ENV | grep -w "ENABLE_CCACHE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "NEED_DTBO=$(cat $CONFIG_ENV | grep -w "NEED_DTBO" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "IS_MIUI=$(cat $CONFIG_ENV | grep -w "IS_MIUI" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+
 
     - name: Set swap to 10G
       uses: pierotofy/set-swap-space@master
@@ -154,6 +156,13 @@ jobs:
         else
           echo "LOCALVERSION=" >> $GITHUB_ENV
         fi
+
+    - name: is miui
+      if: env.IS_MIUI == 'true'
+      run: |
+        sed -i 's/qcom,mdss-pan-physical-width-dimension = <70>;$/qcom,mdss-pan-physical-width-dimension = <700>;/' arch/arm64/boot/dts/vendor/qcom/dsi-panel-j3s-37-02-0a-dsc-video.dtsi
+        sed -i 's/qcom,mdss-pan-physical-height-dimension = <155>;$/qcom,mdss-pan-physical-height-dimension = <1540>;/' arch/arm64/boot/dts/vendor/qcom/dsi-panel-j3s-37-02-0a-dsc-video.dtsi
+  
 
     - name: module patch
       run: |
