@@ -24,8 +24,6 @@ config APATCH_SUPPORT
     
     select EVENTFD
     
-    select BUILD_ARM64_APPENDED_DTB_IMAGE
-    
     select OVERLAY_FS
     
 config APATCH_FIX_MODULES
