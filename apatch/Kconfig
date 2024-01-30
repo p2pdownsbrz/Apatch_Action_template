@@ -16,14 +16,6 @@ config APATCH_SUPPORT
     
     select KALLSYMS_ALL
     
-    select SYSFS_SYSCALL
-    
-    select SIGNALFD
-    
-    select TIMERFD
-    
-    select EVENTFD
-    
     select OVERLAY_FS
     
 config APATCH_FIX_MODULES
@@ -44,8 +36,6 @@ config APATCH_FIX_MODULES
     select MODULE_UNLOAD
     
     select MODULE_FORCE_UNLOAD
-    
-    select MODVERSIONS
 
 config APATCH_CUSTOMS
 
